@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Random;
+
 
 public class MainActivity extends ActionBarActivity {
 
-    public int[] InputQuick ={20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0};
-    public int[] InputSelection ={20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0};
+    public int[] InputQuick = new int[100];
+    public int[] InputSelection = new int[100];
+    public Random generator = new Random();
     public Prime prime = new Prime();
     public Quicksort quicksort = new Quicksort();
     public Factorial factorial = new Factorial();
@@ -21,6 +24,12 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         quicksort.Fill(InputQuick);
+        int Index;
+        for (Index =0 ; Index < 100;Index++){
+
+            InputSelection[Index] = generator.nextInt(1000);
+            InputQuick[Index] = generator.nextInt(1000);
+        }
         factorial.Factorial();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -32,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
 
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        //Debug.startMethodTracing("trace");
+        Debug.startMethodTracing("FactorialIterative");
 
         //prime
         //prime.OnCall(10000);
@@ -46,11 +55,11 @@ public class MainActivity extends ActionBarActivity {
         //selectionSort.Sort(InputSelection);
 
         //Factorial
-        //factorial.Iterative(10);
-        //factorial.Recursive(10);
+        factorial.Iterative(500);
+        //factorial.Recursive(500);
 
 
-        //Debug.stopMethodTracing();
+        Debug.stopMethodTracing();
 
         return true;
     }
